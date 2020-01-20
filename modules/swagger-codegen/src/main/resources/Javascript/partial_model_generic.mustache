@@ -80,7 +80,11 @@
 {{#parent}}
   {{^parentModel}}
     {{#vendorExtensions.x-isArray}}
-  Object.setPrototypeOf(exports.prototype, new Array());
+  if (typeof Object.setPrototypeOf === 'function') {
+    Object.setPrototypeOf(exports.prototype, new Array());
+  } else {
+    exports.prototype.__proto__ = new Array();
+  }
     {{/vendorExtensions.x-isArray}}
   {{/parentModel}}
 {{/parent}}
